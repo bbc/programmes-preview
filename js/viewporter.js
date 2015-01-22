@@ -67,7 +67,7 @@ $(function (w) {
       this.modeButton.on('click', function () {
         self.toggleMode();
       });
-
+      self.toggleMode();
 
     },
     getFromParamOrStorage: function (key) {
@@ -418,31 +418,31 @@ $(function (w) {
         {
           "id": 2,
           "name": "Smartphone Portrait",
-          "width": "320px",
+          "width": "321px",
           "height": "Auto"
         },
         {
           "id": 3,
           "name": "Smartphone Landscape",
-          "width": "500px",
+          "width": "481px",
           "height": "Auto"
         },
         {
           "id": 4,
-          "name": "Tablet Portrait",
-          "width": "768px",
+          "name": "Tablet",
+          "width": "601px",
           "height": "Auto"
         },
         {
           "id": 5,
           "name": "Tablet Landscape",
-          "width": "1008px",
+          "width": "770px",
           "height": "Auto"
         },
         {
           "id": 6,
           "name": "Desktop",
-          "width": "1024px",
+          "width": "1009px",
           "height": "Auto"
         },
         {
