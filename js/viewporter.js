@@ -234,7 +234,7 @@ $(function (w) {
   
   viewporter.urlModel = {
     init: function (url) {      
-      this.setUrl(url || 'http://www.bbc.co.uk/sport/winter-olympics/2014');
+      this.setUrl(url || 'http://www.bbc.co.uk/programmes');
       this.subscribe();
     },
     subscribe: function () {
@@ -287,7 +287,8 @@ $(function (w) {
       url = url !== null ? url : '';
       
       if (this.urlInput.val() !== url) {
-        this.urlInput.val(url);
+        // remove the ?preview=true so that they see the real URL
+        this.urlInput.val(url.replace('?preview=true',''));
       }
     },
     urlButtonPressed: function () {
@@ -418,31 +419,31 @@ $(function (w) {
         {
           "id": 2,
           "name": "Smartphone Portrait",
-          "width": "321px",
+          "width": "320px",
           "height": "Auto"
         },
         {
           "id": 3,
           "name": "Smartphone Landscape",
-          "width": "481px",
+          "width": "480px",
           "height": "Auto"
         },
         {
           "id": 4,
           "name": "Tablet",
-          "width": "601px",
+          "width": "600px",
           "height": "Auto"
         },
         {
           "id": 5,
           "name": "Tablet Landscape",
-          "width": "770px",
+          "width": "768px",
           "height": "Auto"
         },
         {
           "id": 6,
           "name": "Desktop",
-          "width": "1009px",
+          "width": "1008px",
           "height": "Auto"
         },
         {
