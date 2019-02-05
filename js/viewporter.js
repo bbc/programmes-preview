@@ -12,32 +12,20 @@ $(function (w) {
       this.subscribe();
       
       this.params = this.getParams();
-      
+      this.mode = this.MODE_SIZE;
+
       this.viewport = $('#viewport');
       this.viewportContainer = $('#viewport-container');
-      
       this.mainMenu = $('#main-menu');
-      
-      this.mode = this.MODE_SIZE;
       this.modeButton = $('#mode-btn');
-      
       this.shareButton = $('#share-btn');
-
       this.helpButton = $('#help-btn');
-      
-      this.flashInfo.init();
-      
-      this.urlUI.init();
-      this.urlModel.init(
-        this.getFromParamOrStorage('url')
-      );
-      
-      this.sizeUI.init();
-      this.sizeModel.init(
-        this.getFromParamOrStorage('width'),
-        this.getFromParamOrStorage('height')
-      );
 
+      this.flashInfo.init();
+      this.urlUI.init();
+      this.urlModel.init(this.getFromParamOrStorage('url'));
+      this.sizeUI.init();
+      this.sizeModel.init(this.getFromParamOrStorage('width'), this.getFromParamOrStorage('height'));
       this.presetsUI.init();
       this.presetsModel.init(this.sizeModel);
 
@@ -45,8 +33,7 @@ $(function (w) {
 
       this.shareButton.on('click', function () {
         
-        var qs,
-          shareUrl;
+        var qs, shareUrl;
         
         if (!window.location.origin) {
           window.location.origin = window.location.protocol + "//" + window.location.host;
@@ -72,16 +59,9 @@ $(function (w) {
     },
     getFromParamOrStorage: function (key) {
       var value;
-      if (this.params[key]) {
-        value = this.params[key];
+      if (value = this.params[key]) {
         console.log("Fetched '" + key + "' from params (" + value + ")");
-      } else {
-        value = localStorage.getItem(key);
-        
-        if (!value) {
-          value = '';
-        }
-        
+      } else if (value = localStorage.getItem(key)) {
         console.log("Fetched '" + key + "' from local storage (" + value + ")");
       }
       return value;
@@ -233,7 +213,7 @@ $(function (w) {
   };
   
   viewporter.urlModel = {
-    init: function (url) {      
+    init: function (url) {
       this.setUrl(url || 'http://www.bbc.co.uk/programmes');
       this.subscribe();
     },
@@ -292,7 +272,7 @@ $(function (w) {
       }
     },
     urlButtonPressed: function () {
-      $.Topic('urlUI:didChangeUrl').publish(this.urlInput.val());
+      $.Topic('urlUI:didChangeUrl').publish(this.urlInput.val() + '?preview=true');
     },
     toggleActive: function () {
       if (this.active) {
@@ -472,7 +452,7 @@ $(function (w) {
       }
       
       this.initPresets();
-      
+
       this.subscribe();
     },
     subscribe: function () {
