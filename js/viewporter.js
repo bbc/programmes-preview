@@ -214,7 +214,11 @@ $(function (w) {
   
   viewporter.urlModel = {
     init: function (url) {
-      this.setUrl(url || 'http://www.bbc.co.uk/programmes');
+      if (url === null || url === '') {
+        console.log(url);
+          // url = 'http://www.bbc.co.uk/programmes';
+      }
+      this.setUrl(url);
       this.subscribe();
     },
     subscribe: function () {
@@ -272,7 +276,7 @@ $(function (w) {
       }
     },
     urlButtonPressed: function () {
-      $.Topic('urlUI:didChangeUrl').publish(this.urlInput.val() + '?preview=true');
+      $.Topic('urlUI:didChangeUrl').publish(this.urlInput.val());
     },
     toggleActive: function () {
       if (this.active) {
@@ -432,27 +436,16 @@ $(function (w) {
           "width": "1280px",
           "height": "Auto"
         }
-      ],
-      presets;
-      
+      ];
+
       this.sizeModel = sizeModel;
       this.maxPresetId = -1;
       this.presets = [];
       this.presetsById = {};
       this.selectedPreset = null;
-      
-      /* Fetch from local storage */
-      if (localStorage.getItem("presets") !== null) {
-        this.presets = JSON.parse(localStorage.getItem("presets"));
-      }
-      /* Retrieve from local storage */
-      else {
-        this.presets = defaultPresets;
-        this.save();
-      }
-      
-      this.initPresets();
 
+      this.presets = defaultPresets;
+      this.initPresets();
       this.subscribe();
     },
     subscribe: function () {
